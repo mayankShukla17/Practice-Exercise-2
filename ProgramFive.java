@@ -6,13 +6,13 @@ Input:
              United States
              Germany
              Egypt
-             czechoslovakia
+             Czechoslovakia
 Output:
    Place Name without Vowels:0 Ind
    Place Name without Vowels:1 Untd Stts
    Place Name without Vowels:2 Grmny
    Place Name without Vowels:3 Egypt
-   Place Name without Vowels:4 czchslvk
+   Place Name without Vowels:4 Czchslvk
  */
 import java.util.*;
 public class ProgramFive {
@@ -23,24 +23,22 @@ public class ProgramFive {
 		String countriesArray[]=new String[size];
 		System.out.println("Enter "+size+" countries.");
 		for (int i = 0; i < countriesArray.length; i++) {
-			countriesArray[i]=scanner.nextLine();
+			countriesArray[i]=scanner.next();
 		}
 		for (int i = 0; i < countriesArray.length; i++) {
-			String st=countriesArray[i];
-			String res=removeVowel(st);
-			System.out.println("Place Name without Vowels:"+i+" "+res);
+			String string=countriesArray[i];
+			string=removeVowel(string);
+			System.out.println("Place Name without Vowels:"+i+" "+string);
 		}
 	}
-	public static String removeVowel( String string) {
-		Character vowels[] = {'a', 'e', 'i', 'o', 'u','A','E','I','O','U'}; 
-		List<Character> al = Arrays.asList(vowels); 
-		StringBuffer sb = new StringBuffer(string); 
-		for (int i = 0; i < sb.length(); i++) { 
-			if(al.contains(sb.charAt(i))){ 
-				sb.replace(i, i+1, "") ; 
-				i--; 
-			} 
-		} 
-		return sb.toString(); 
+	public static String removeVowel(String string) {
+		String output=""+string.charAt(0);
+		for (int i = 1; i < string.length(); i++) {
+			char character=string.charAt(i);
+			if (character=='A'||character=='E'||character=='I'||character=='O'||character=='U'||character=='a'||character=='e'||character=='i'||character=='o'||character=='u') 
+				continue;
+			output=output+character;
+		}
+		return output;
 	}
 }

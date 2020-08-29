@@ -15,35 +15,47 @@ public class ProgramSix {
 	public static void main(String[] args) {
 		Scanner scanner=new Scanner(System.in);
 		System.out.println("Enter the string of numbers.");
-		String str =scanner.next();
-		System.out.println("String: " + str);
-		int start = isConsecutive(str);
-		if (start != -1)
-			System.out.println("Yes \n" + start);
-		else
-			System.out.println("No");
-	}
-	static int isConsecutive(String str){
-		int start;
-
-		int length = str.length();
-
-		for (int i = 0; i < length / 2; i++){
-
-			String new_str = str.substring(0, i + 1);
-
-			int num = Integer.parseInt(new_str);
-
-			start = num;
-
-			while (new_str.length() < length){
-				num++;
-				new_str = new_str + String.valueOf(num);
-			}
-
-			if (new_str.equals(str))
-				return start;
+		String string=scanner.next();
+		String stringArray[] = string.split(",");
+		int numberArray[]=new int[stringArray.length];
+		for (int i = 0; i < numberArray.length; i++) {
+			numberArray[i]=Integer.parseInt(stringArray[i]);
 		}
-		return -1;
+		if (isConsecutive(numberArray, numberArray.length))
+			System.out.println(Arrays.toString(numberArray)+" are consecutive numbers");
+		else
+			System.out.println(Arrays.toString(numberArray)+" are non consecutive numbers");
+	}
+	public static boolean isConsecutive(int array [], int size){
+		if ( size <  1 )
+			return false;
+		int minimum = getMinimum(array, size);
+		int maximum = getMaximum(array, size);
+		if (maximum - minimum  + 1 == size){
+			boolean[] visited=new boolean[array.length];
+			for (int i = 0; i < size; i++){
+				if ( visited[array[i] - minimum] != false )
+					return false;
+				visited[array[i] - minimum] = true;
+			}
+			return true;
+		}
+		return false; 
+	}
+	/* Method return minimum value*/
+	public static int getMinimum(int array[], int size){
+		int minimum = array[0];
+		for (int i = 1; i < size; i++)
+			if (array[i] < minimum)
+				minimum = array[i];
+		return minimum;
+	}
+	/* Method return maximum value*/
+	public static int getMaximum(int array[], int size){
+		int maximum = array[0];
+		for (int i = 1; i < size; i++)
+			if (array[i] > maximum)
+				maximum = array[i];
+		return maximum;
 	}
 }
